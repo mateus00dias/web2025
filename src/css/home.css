@@ -1,0 +1,47 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("../img/home.jpg"); /* Substitua pelo caminho da sua imagem */
+    background-size: cover;
+    background-position: center;
+    color: #fff; /* Adicionei uma cor de texto branca para melhor visibilidade */
+}
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button {
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    background-color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+.button img {
+    width: 30px; /* Tamanho do ícone */
+    height: 30px;
+    margin-right: 10px; /* Espaço entre o ícone e o texto */
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+@media only screen and (max-width: 600px) {
+    .button {
+        width: 100%;
+    }
+}
+

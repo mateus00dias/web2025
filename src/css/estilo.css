@@ -1,0 +1,168 @@
+.sidebar{
+    width: 50px;
+    height:100vh;
+    background-color: #514869;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #fff;
+    overflow: hidden;
+    transition: width .75s ease;
+    
+}
+
+.sidebar:hover{
+    width: 200px;
+}
+
+.sidebar li{
+    width: 24px;
+    height: 24px;
+    margin-left: 12px; 
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar a {
+    color: white;
+    text-decoration: none; 
+}
+
+
+.menudiv {
+    display: flex;
+    align-items: center; /* Centralizar verticalmente */
+    justify-content: center; /* Centralizar horizontalmente */
+    height: auto; /* Altura automática para envolver o conteúdo */
+    background-color: transparent; /* Cor de fundo inicial */
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Transição de cor de fundo */
+    padding: 10px; /* Espaçamento interno */
+}
+
+.menudiv:hover{
+    background-color: rgba(143, 135, 135, 0.336);
+    border-radius: 5px;
+}
+.icon-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.icon-item span {
+    color: #fff;
+    margin-left: 20px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    
+    background-size: cover;
+}
+
+
+body > h1 {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    position: absolute;
+    top: 10%; /* Posiciona a metade superior do h1 no meio da tela */
+    left: 50%; /* Posiciona a metade esquerda do h1 no meio da tela */
+    transform: translate(-50%, -50%); /* Centraliza vertical e horizontalmente */
+    margin: 0; /* Remover margem padrão */
+    padding: 0; /* Remover padding padrão */
+}
+
+footer > p {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    position: absolute;
+    top: 95%; /* Posiciona a metade superior do h1 no meio da tela */
+    left: 50%; /* Posiciona a metade esquerda do h1 no meio da tela */
+    transform: translate(-50%, -50%); /* Centraliza vertical e horizontalmente */
+    margin: 0; /* Remover margem padrão */
+    padding: 0; /* Remover padding padrão */
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px; /* Aumenta a altura da barra superior */
+    background-color: #514869;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.topbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.topbar li {
+    margin-right: 20px;
+}
+
+.topbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 25px; /* Aumenta o tamanho do texto */
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.topbar a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    padding-top: 50px; /* Adicione um espaço no topo para a barra superior */
+    box-sizing: border-box;
+    background-color: #452f816c;
+}
+
+h1, footer {
+    position: relative;
+    z-index: 1;
+}
+
+.topbar {
+    z-index: 2;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 50%;
+    background-position: center;
+    z-index: -1; /* Certifica-se de que a imagem esteja atrás do conteúdo */
+}
+
+
+
+
+
+
