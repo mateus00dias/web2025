@@ -1,7 +1,7 @@
 // src/components/CarroForm.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import '../../css/cadastro.css';
+import '../../css/lista.css';
 
 const CarroForm = () => {
   const [marca, setMarca] = useState('');
@@ -14,7 +14,7 @@ const CarroForm = () => {
   useEffect(() => {
     if (id) {
       // Editar carro existente
-      fetch(`http://localhost:3002/veiculos/${id}`)
+      fetch(`http://localhost:3002/carros/${id}`)
         .then(response => response.json())
         .then(carro => {
           setMarca(carro.Marca);
@@ -26,26 +26,39 @@ const CarroForm = () => {
     }
   }, [id]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const carroData = { Marca: marca, Modelo: modelo, Ano: ano, Preco: preco };
+    const carroData = {
+      Marca: marca,
+      Modelo: modelo,
+      Ano: ano,
+      Preco: preco,
+    };
 
     const url = id
-      ? `http://localhost:3000/veiculos/${id}`
-      : 'http://localhost:3000/veiculos';
+      ? `http://localhost:3002/carros/${id}`
+      : 'http://localhost:3002/carros';
 
     const method = id ? 'PUT' : 'POST';
 
-    fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(carroData),
-    })
-      .then(() => {
-        alert(id ? 'Veículo atualizado com sucesso' : 'Veículo criado com sucesso');
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(carroData),
+      });
+
+      if (response.ok) {
+        alert(id ? 'Carro atualizado com sucesso' : 'Carro criado com sucesso');
         navigate('/lista-carros');
-      })
-      .catch(error => console.error('Erro ao salvar veículo:', error));
+      } else {
+        const errorMessage = await response.text();
+        throw new Error(`Erro ao salvar carro: ${errorMessage}`);
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao processar o carro. Consulte o console para obter mais informações.');
+    }
   };
 
   return (
@@ -74,7 +87,7 @@ const CarroForm = () => {
 
         <label htmlFor="ano">Ano:</label>
         <input
-          type="text"
+          type="number"
           id="ano"
           name="ano"
           value={ano}

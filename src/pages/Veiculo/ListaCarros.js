@@ -1,104 +1,75 @@
-// src/components/CarroForm.js
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import '../../css/lista.css';
+// src/components/ListaCarros.js
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const CarroForm = () => {
-  const [marca, setMarca] = useState('');
-  const [modelo, setModelo] = useState('');
-  const [ano, setAno] = useState('');
-  const [preco, setPreco] = useState('');
+const ListaCarros = () => {
+  const [carros, setCarros] = useState([]);
   const navigate = useNavigate();
-  const { id } = useParams();
 
   useEffect(() => {
-    if (id) {
-      // Editar carro existente
-      fetch(`http://localhost:3002/veiculos/${id}`)
-        .then(response => response.json())
-        .then(carro => {
-          setMarca(carro.Marca);
-          setModelo(carro.Modelo);
-          setAno(carro.Ano);
-          setPreco(carro.Preco);
-        })
-        .catch(error => console.error('Erro ao carregar carro:', error));
+    fetch('http://localhost:3002/veiculos')
+      .then(response => response.json())
+      .then(data => setCarros(data))
+      .catch(error => console.error('Erro ao carregar carros:', error));
+  }, []);
+
+  const editarCarro = (id) => {
+    navigate(`/cadastro-carro/${id}`);
+  };
+
+  const excluirCarro = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3002/veiculos/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        alert('Carro excluído com sucesso');
+        setCarros(carros.filter(carro => carro.ID_Carro !== id));
+      } else {
+        const errorMessage = await response.text();
+        throw new Error(`Erro ao excluir carro: ${errorMessage}`);
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao excluir carro. Consulte o console para obter mais informações.');
     }
-  }, [id]);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const carroData = { Marca: marca, Modelo: modelo, Ano: ano, Preco: preco };
-
-    const url = id
-      ? `http://localhost:3000/veiculos/${id}`
-      : 'http://localhost:3000/veiculos';
-
-    const method = id ? 'PUT' : 'POST';
-
-    fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(carroData),
-    })
-      .then(() => {
-        alert(id ? 'Veículo atualizado com sucesso' : 'Veículo criado com sucesso');
-        navigate('/lista-carros');
-      })
-      .catch(error => console.error('Erro ao salvar veículo:', error));
   };
 
   return (
     <div>
-      <h1>Cadastro/Edição de Carro</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="marca">Marca:</label>
-        <input
-          type="text"
-          id="marca"
-          name="marca"
-          value={marca}
-          onChange={(e) => setMarca(e.target.value)}
-          required
-        />
-
-        <label htmlFor="modelo">Modelo:</label>
-        <input
-          type="text"
-          id="modelo"
-          name="modelo"
-          value={modelo}
-          onChange={(e) => setModelo(e.target.value)}
-          required
-        />
-
-        <label htmlFor="ano">Ano:</label>
-        <input
-          type="text"
-          id="ano"
-          name="ano"
-          value={ano}
-          onChange={(e) => setAno(e.target.value)}
-          required
-        />
-
-        <label htmlFor="preco">Preço:</label>
-        <input
-          type="text"
-          id="preco"
-          name="preco"
-          value={preco}
-          onChange={(e) => setPreco(e.target.value)}
-          required
-        />
-
-        <button type="submit">Salvar</button>
-      </form>
-
-      <button onClick={() => navigate('/lista-carros')}>Voltar para a Lista</button>
+      <h1>Listagem de Carros</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Ano</th>
+            <th>Preço</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {carros.map(carro => (
+            <tr key={carro.ID_Carro}>
+              <td>{carro.ID_Carro}</td>
+              <td>{carro.Marca}</td>
+              <td>{carro.Modelo}</td>
+              <td>{carro.Ano}</td>
+              <td>{carro.Preco}</td>
+              <td>
+                <button onClick={() => editarCarro(carro.ID_Carro)}>Editar</button>
+                <button onClick={() => excluirCarro(carro.ID_Carro)}>Excluir</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <button onClick={() => navigate('/cadastro-carro')}>Novo Carro</button>
       <button onClick={() => navigate('/home')}>Home</button>
     </div>
   );
 };
 
-export default CarroForm;
+export default ListaCarros;

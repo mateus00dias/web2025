@@ -40,10 +40,12 @@ const Home = () => {
               <li><Link to="/cadastro-cliente">Cadastrar Cliente</Link></li>
               <li><Link to="/cadastro-carro">Cadastrar Veículo</Link></li>
               <li><Link to="/cadastro-venda">Fazer Venda</Link></li>
+              <li><Link to="/cadastro-usuario">Cadastrar Usuário</Link></li>
               <li><Link to="/lista-clientes">Listar Clientes</Link></li>
               <li><Link to="/lista-carros">Listar Veículos</Link></li>
               <li><Link to="/lista-vendas">Relatório de Vendas</Link></li>
-              <li><Link to="/usuario/cadastro">Cadastrar Usuário</Link></li>
+              <li><Link to="/lista-usuario">Lista Usuário</Link></li>
+              
             </ul>
           </nav>
         </header>

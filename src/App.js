@@ -8,13 +8,11 @@ import VendaForm from './pages/Venda/VendaForm';
 import ListaVendas from './pages/Venda/ListaVenda';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import UsuarioForm from './pages/Usuario/UsuarioForm';
+import ListaUsuarios from './pages/Usuario/ListaUsuarios';
 
 function App() {
-  const Private = ({ Item }) => {
-    const { signed } = useAuth();
   
-    return signed > 0 ? <Item /> : <Home />;
-  };
    
   return (
     <Router>
@@ -23,6 +21,8 @@ function App() {
         <Route path="/home" element={<Home/>} />
         <Route path="/cadastro-cliente" element={<CadastroCliente />} />
         <Route path="/lista-clientes" element={<ListaClientes />} />
+        <Route path="/cadastro-usuario/:id?" element={<UsuarioForm />} />
+        <Route path="/lista-usuario/:id?" element={<ListaUsuarios />} />
         <Route path="/cadastro-carro/:id?" element={<CarroForm />} />
         <Route path="/lista-carros" element={<ListaCarros />} />
         <Route path="/cadastro-venda/:id?" element={<VendaForm />} />

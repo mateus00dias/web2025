@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
 // Rota para atualizar um usuário
 router.put('/:id', async (req, res) => {
     try {
-        const { NomeUsuario, Senha, Email, Role } = req.body;
+        const { NomeUsuario, Senha, Email } = req.body;
         const result = await db.query('UPDATE Usuarios SET NomeUsuario = ?, Senha = ?, Email = ?, Role = ? WHERE ID_Usuario = ?', [NomeUsuario, Senha, Email, Role, req.params.id]);
         if (result[0].affectedRows > 0) {
             res.send('Usuário atualizado com sucesso');
