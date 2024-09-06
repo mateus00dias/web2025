@@ -10,7 +10,7 @@ const Login = () => {
 
   const realizarLogin = async () => {
     try {
-      const response = await fetch('http://localhost:3000/login', {
+      const response = await fetch('http://localhost:3002/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

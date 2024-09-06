@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const db = require('../database'); // Importa a configuração do banco de dados
 // Rota para listar todos os usuários
 router.get('/', async (req, res) => {
@@ -70,9 +72,11 @@ router.post('/login', async (req, res) => {
     try {
         const { NomeUsuario, Senha } = req.body;
         const [usuario] = await db.query('SELECT * FROM Usuarios WHERE NomeUsuario = ? AND Senha = ?', [NomeUsuario, Senha]);
-
+        const token = jwt.sign({ id: usuario.ID_Usuario, email: usuario.email }, JWT_SECRET, {
+            expiresIn: '10d',
+          });
         if (usuario.length > 0) {
-            res.status(200).json({ message: 'Login bem-sucedido' });
+            res.status(200).json({token, message: 'Login bem-sucedido' });
         } else {
             res.status(401).json({ message: 'Nome de usuário ou senha inválidos' });
         }

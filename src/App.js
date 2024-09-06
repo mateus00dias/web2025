@@ -10,6 +10,12 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 
 function App() {
+  const Private = ({ Item }) => {
+    const { signed } = useAuth();
+  
+    return signed > 0 ? <Item /> : <Home />;
+  };
+   
   return (
     <Router>
       <Routes>
