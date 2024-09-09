@@ -111,6 +111,7 @@ body * {
     box-shadow: 0px 10px 40px -12px #00ff8052;
 }
 
+/* Ajustes para telas menores */
 @media (max-width: 950px) {
     .card-login {
         width: 85%;
@@ -122,8 +123,8 @@ body * {
         flex-direction: column;
     }
 
-    .left-login  h1 {
-        display: none;
+    .left-login h1 {
+        display: none; /* Esconde o título no layout mobile */
     }
 
     .left-login {
@@ -137,10 +138,16 @@ body * {
     }
 
     .left-login-img {
-        width: 50vw;
+        width: 100vw;
+        height: auto; /* Garante que a imagem mantenha a proporção */
     }
 
     .card-login {
         width: 90%;
+        padding: 20px 15px; /* Ajusta o padding para uma melhor visualização em mobile */
+    }
+
+    .card-login h1 {
+        font-size: 2em; /* Ajusta o tamanho da fonte do título para mobile */
     }
 }

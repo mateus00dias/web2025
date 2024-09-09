@@ -1,41 +1,38 @@
 // src/components/Login.js
-import React, { useState } from 'react';
+import React, { useState , useContext, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../css/login.css';
+import { AuthContext } from '../../context/auth';
+import Img from '../../img/img.png';
+
 
 const Login = () => {
+  const { SignIn, signed } = useContext(AuthContext);
   const [nomeUsuario, setNomeUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
 
-  const realizarLogin = async () => {
-    try {
-      const response = await fetch('http://localhost:3002/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ nomeUsuario, senha }),
-      });
+  useEffect(() => {
+		if (signed) {
+			navigate("/financeiro");
+		}
+	}, [signed, navigate]);
 
-      if (response.ok) {
-        alert('Login realizado com sucesso');
-        navigate('/home'); // Redireciona para a página inicial após o login
-      } else {
-        const errorMessage = await response.text();
-        throw new Error(`Erro ao realizar login: ${errorMessage}`);
-      }
-    } catch (error) {
-      console.error(error);
-      alert('Erro ao realizar login. Consulte o console para obter mais informações.');
-    }
-  };
+  const handleSignIn = async (e) => {
+		e.preventDefault();
+	
+		try {
+			await SignIn(nomeUsuario, senha);
+		} catch (error) {
+			console.error("Login failed:", error);
+		}
+	};
 
   return (
     <div className="main-login">
       <div className="left-login">
         <h1>Faça seu login<br />E entre para o nosso time</h1>
-        <img src="Front/img/img.png" className="left-login-img" alt="Animação" />
+        <img src={Img} alt="Home" />
       </div>
       <div className="right-login">
         <div className="card-login">
@@ -62,7 +59,7 @@ const Login = () => {
               required
             />
           </div>
-          <button className="btn-login" type="button" onClick={realizarLogin}>
+          <button className="btn-login" type="button" onClick={handleSignIn}>
             Login
           </button>
         </div>

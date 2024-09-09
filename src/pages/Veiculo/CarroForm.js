@@ -14,7 +14,7 @@ const CarroForm = () => {
   useEffect(() => {
     if (id) {
       // Editar carro existente
-      fetch(`http://localhost:3002/carros/${id}`)
+      fetch(`http://localhost:3002/veiculos/${id}`)
         .then(response => response.json())
         .then(carro => {
           setMarca(carro.Marca);
@@ -36,8 +36,8 @@ const CarroForm = () => {
     };
 
     const url = id
-      ? `http://localhost:3002/carros/${id}`
-      : 'http://localhost:3002/carros';
+      ? `http://localhost:3002/veiculos/${id}`
+      : 'http://localhost:3002/veiculos';
 
     const method = id ? 'PUT' : 'POST';
 

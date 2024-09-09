@@ -7,18 +7,14 @@ const ListaClientes = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    carregarClientes();
+    fetch('http://localhost:3002/clientes')
+      .then(response => response.json())
+      .then(data => setClientes(data))
+      .catch(error => console.error('Erro ao carregar clientes:', error));
   }, []);
 
-  const carregarClientes = () => {
-    fetch('http://localhost:3002/clientes')
-      .then((response) => response.json())
-      .then((data) => setClientes(data))
-      .catch((error) => console.error('Erro ao carregar clientes:', error));
-  };
-
   const editarCliente = (id) => {
-    navigate(`/cadastro-cliente?id=${id}`);
+    navigate(`/cadastro-cliente/${id}`);
   };
 
   const excluirCliente = async (id) => {
@@ -29,13 +25,14 @@ const ListaClientes = () => {
 
       if (response.ok) {
         alert('Cliente excluído com sucesso');
-        carregarClientes();
+        setClientes(clientes.filter(cliente => cliente.ID_Cliente !== id));
       } else {
-        throw new Error('Erro ao excluir cliente');
+        const errorMessage = await response.text();
+        throw new Error(`Erro ao excluir cliente: ${errorMessage}`);
       }
     } catch (error) {
       console.error(error);
-      alert('Erro ao excluir cliente. Consulte o console para mais informações.');
+      alert('Erro ao excluir cliente. Consulte o console para obter mais informações.');
     }
   };
 
@@ -55,7 +52,7 @@ const ListaClientes = () => {
           </tr>
         </thead>
         <tbody>
-          {clientes.map((cliente) => (
+          {clientes.map(cliente => (
             <tr key={cliente.ID_Cliente}>
               <td>{cliente.ID_Cliente}</td>
               <td>{cliente.Nome}</td>

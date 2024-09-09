@@ -1,34 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import '../../css/cadastro.css';
+import '../../css/lista.css';
 
-const CadastroCliente = () => {
+const ClienteForm = () => {
   const [nome, setNome] = useState('');
   const [cpfCnpj, setCpfCnpj] = useState('');
   const [endereco, setEndereco] = useState('');
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
-  const { id } = useParams(); // Pega o ID da URL
+  const { id } = useParams();
 
+  // Função para buscar cliente pelo ID se for edição
   useEffect(() => {
     if (id) {
-      // Editar cliente existente
       fetch(`http://localhost:3002/clientes/${id}`)
-        .then(response => response.json())
-        .then(cliente => {
+        .then((response) => response.json())
+        .then((cliente) => {
           setNome(cliente.Nome);
           setCpfCnpj(cliente.CPF_CNPJ);
           setEndereco(cliente.Endereco);
           setTelefone(cliente.Telefone);
           setEmail(cliente.Email);
         })
-        .catch(error => console.error('Erro ao carregar cliente:', error));
+        .catch((error) => console.error('Erro ao carregar cliente:', error));
     }
   }, [id]);
 
+  // Função para enviar os dados do cliente
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const clienteData = {
       Nome: nome,
       CPF_CNPJ: cpfCnpj,
@@ -38,10 +40,10 @@ const CadastroCliente = () => {
     };
 
     const url = id
-      ? `http://localhost:3002/clientes/${id}` // URL para atualizar cliente existente
-      : 'http://localhost:3002/clientes';     // URL para criar novo cliente
+      ? `http://localhost:3002/clientes/${id}`
+      : 'http://localhost:3002/clientes';
 
-    const method = id ? 'PUT' : 'POST'; // Método PUT para atualização, POST para criação
+    const method = id ? 'PUT' : 'POST'; // Se for editar usa PUT, se for criar usa POST
 
     try {
       const response = await fetch(url, {
@@ -77,11 +79,11 @@ const CadastroCliente = () => {
           required
         />
 
-        <label htmlFor="cpf_cnpj">CPF/CNPJ:</label>
+        <label htmlFor="cpfCnpj">CPF/CNPJ:</label>
         <input
           type="text"
-          id="cpf_cnpj"
-          name="cpf_cnpj"
+          id="cpfCnpj"
+          name="cpfCnpj"
           value={cpfCnpj}
           onChange={(e) => setCpfCnpj(e.target.value)}
           required
@@ -117,7 +119,7 @@ const CadastroCliente = () => {
           required
         />
 
-        <button type="submit">Salvar</button>
+        <button type="submit">{id ? 'Atualizar' : 'Cadastrar'}</button>
       </form>
 
       <button onClick={() => navigate('/lista-clientes')}>Voltar para a Lista</button>
@@ -126,4 +128,4 @@ const CadastroCliente = () => {
   );
 };
 
-export default CadastroCliente;
+export default ClienteForm;

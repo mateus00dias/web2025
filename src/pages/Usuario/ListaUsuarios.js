@@ -1,6 +1,7 @@
 // src/components/ListaUsuarios.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../../css/lista.css';
 
 const ListaUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);

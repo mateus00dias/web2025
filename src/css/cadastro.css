@@ -8,39 +8,39 @@ body {
 h1 {
     text-align: center;
     color: #333;
-    font-size: 1.25em; /* Aumento de 25% */
+    font-size: 1.25em;
 }
 
 form {
-    max-width: 500px; /* Aumento de 25% */
-    margin: 25px auto; /* Aumento de 25% */
-    padding: 25px; /* Aumento de 25% */
+    max-width: 500px;
+    margin: 25px auto;
+    padding: 25px;
     background-color: #fff;
-    border-radius: 10px; /* Aumento de 25% */
+    border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 label {
     display: block;
-    margin-bottom: 10px; /* Aumento de 25% */
+    margin-bottom: 10px;
     color: #333;
 }
 
 input {
     width: 100%;
-    padding: 10px; /* Aumento de 25% */
-    margin-bottom: 20px; /* Aumento de 25% */
+    padding: 10px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px; /* Aumento de 25% */
+    border-radius: 5px;
     box-sizing: border-box;
 }
 
 button {
     background-color: #362369;
     color: #fff;
-    padding: 12.5px 18.75px; /* Aumento de 25% */
+    padding: 12.5px 18.75px;
     border: none;
-    border-radius: 5px; /* Aumento de 25% */
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -53,10 +53,33 @@ a {
     text-align: center;
     color: #333;
     text-decoration: none;
-    margin-top: 25px; /* Aumento de 25% */
+    margin-top: 25px;
 }
 
 a:hover {
     text-decoration: underline;
 }
 
+/* Estilos para telas pequenas (mobile) */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1em; /* Reduz o tamanho da fonte */
+    }
+
+    form {
+        max-width: 90%; /* Ajusta o formulário para ocupar mais a tela */
+        padding: 15px; /* Diminui o padding */
+    }
+
+    input {
+        padding: 8px; /* Reduz o padding dos inputs */
+    }
+
+    button {
+        padding: 10px 15px; /* Diminui o padding dos botões */
+    }
+
+    a {
+        margin-top: 15px; /* Diminui a margem superior dos links */
+    }
+}

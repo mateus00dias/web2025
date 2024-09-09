@@ -1,0 +1,113 @@
+/* Estilos Gerais */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #452f81;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilizando a Tabela */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  
+  table thead {
+    background-color: #452f81;
+    color: white;
+  }
+  
+  table th, table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  table th {
+    text-transform: uppercase;
+  }
+  
+  table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  
+  /* Botões de Ação */
+  button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Estilo dos Botões */
+  button:hover {
+    background-color: #5d3e96;
+    color: white;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  button.edit {
+    background-color: #674aa7;
+    color: white;
+  }
+  
+  button.delete {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  button.new-client, button.home {
+    background-color: #452f81;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  button.new-client:hover, button.home:hover {
+    background-color: #5d3e96;
+  }
+  
+  /* Estilos para Botões de "Novo Cliente" e "Home" */
+  .new-client-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    table, th, td {
+      font-size: 14px;
+    }
+  
+    button {
+      font-size: 12px;
+    }
+  
+    button.new-client, button.home {
+      padding: 10px;
+      font-size: 14px;
+    }
+  }
+  

@@ -4,8 +4,8 @@ const app = express();
 const cors = require('cors'); // Importe o pacote cors
 
 // Configuração do body-parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors()); // Permita solicitações CORS de todas as origens
 
 // Importação das rotas

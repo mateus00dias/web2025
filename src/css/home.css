@@ -1,47 +1,135 @@
-body {
+/* Reset básico para todos os elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, #e0e0eb 0%, #d1c4e9 50%, #452f81 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    background-image: url("../img/home.jpg"); /* Substitua pelo caminho da sua imagem */
-    background-size: cover;
-    background-position: center;
-    color: #fff; /* Adicionei uma cor de texto branca para melhor visibilidade */
-}
-.button-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.button {
-    display: block;
-    width: 100%;
-    height: 50px;
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
-    color: #fff;
-    background-color: #000;
-    border-radius: 5px;
-    cursor: pointer;
+    overflow: hidden;
+    color: #333;
   }
-
-.button img {
-    width: 30px; /* Tamanho do ícone */
-    height: 30px;
-    margin-right: 10px; /* Espaço entre o ícone e o texto */
-}
-
-.button:hover {
-    background-color: #45a049;
-}
-
-@media only screen and (max-width: 600px) {
-    .button {
-        width: 100%;
+  
+  /* Estrutura da Home */
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    width: 100%;
+    background-image: url('../img/home.jpg'); /* Adicionando imagem de fundo */
+    background-size: cover; /* Cobrir toda a área */
+    background-position: center; /* Centralizar a imagem */
+    background-repeat: no-repeat; /* Não repetir a imagem */
+  }
+  
+  /* Header */
+  .header {
+    width: 100vw; /* Diminuindo a largura da barra superior */
+    height: 10vw;
+    padding: 20px 50px;
+    background-color: #452f81; /* Fundo sólido */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto; /* Centraliza o header na tela */
+  }
+  
+  .logo img {
+    width: 220px; /* Aumentando o tamanho da logo */
+    margin-right: 20px; /* Posicionando a logo mais à direita */
+  }
+  
+  .menu ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+  
+  .menu ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s;
+  }
+  
+  .menu ul li a:hover {
+    color: #b9a9e6;
+  }
+  
+  /* Conteúdo Principal */
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .welcome-text {
+    font-size: 1.8rem;
+    color: #000;
+    margin-bottom: 30px;
+    margin-right: 100px;
+  }
+  
+  .action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .action-btn {
+    background-color: #674aa7;
+    color: white;
+    padding: 20px 40px;
+    font-size: 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .action-btn:hover {
+    background-color: #5d3e96;
+    transform: translateY(-5px);
+  }
+  
+  /* Footer */
+  .footer {
+    width: 100vw; /* Garante que o footer ocupe toda a largura da tela */
+    padding: 15px;
+    background-color: #452f81; /* Fundo sólido */
+    color: white;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .action-buttons {
+      grid-template-columns: 1fr;
     }
-}
-
+  
+    .header {
+      padding: 10px 20px;
+    }
+  
+    .logo img {
+      width: 180px; /* Ajuste proporcional para telas menores */
+    }
+  
+    .welcome-text {
+      font-size: 2rem;
+    }
+  }
+  

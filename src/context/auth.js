@@ -1,9 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import api from "../services/api";
 import Cookies from "js-cookie";
-import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode"; 
-import LoadingComponent from "../components/LoadingComponent/LoadingComponent";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -21,16 +19,15 @@ export const AuthProvider = ({ children }) => {
 
 					if (isTokenExpired) {
 						signout(); 
-						toast.error("Sessão expirada. Por favor, faça login novamente.");
+						console.log("Sessão expirada. Por favor, faça login novamente.");
 					} else {
-						setUser({ id: tokenData.id, email: tokenData.email });
+						setUser({ id: tokenData.id, nomeUsuario: tokenData.nomeUsuario });
 						api.defaults.headers.common[
 							"Authorization"
 						] = `Bearer ${userToken}`;
 					}
 				} catch (error) {
 					console.error("Erro ao decodificar o token:", error);
-					toast.error("Erro de autenticação. Por favor, faça login novamente.");
 					signout();
 				}
 			}
@@ -40,17 +37,19 @@ export const AuthProvider = ({ children }) => {
 		checkToken();
 	}, []);
 
-	const SignIn = async ({ email, password }) => {
-		if (!email || !password) {
-			toast.error("Email e Senha são necessários!");
+	const SignIn = async ( nomeUsuario, senha ) => {
+		if (!nomeUsuario || !senha) {
+			console.log("nomeUsuario e Senha são necessários!");
 			return;
 		}
+		const NomeUsuario = nomeUsuario;
+		const Senha = senha;
 		try {
 			setLoading(true);
-			const response = await api.post("/usuarios/login", { email, password });
+			const response = await api.post("/usuarios/login", { NomeUsuario, Senha });
 			if (response.status === 200 && response.data.token) {
 				const tokenData = jwtDecode(response.data.token);
-				setUser({ id: tokenData.id, email: tokenData.email });
+				setUser({ id: tokenData.id, nomeUsuario: tokenData.nomeUsuario });
 				Cookies.set("@Auth:token", response.data.token, {
 					expires: 7,
 					secure: true,
@@ -59,7 +58,6 @@ export const AuthProvider = ({ children }) => {
 				api.defaults.headers.common[
 					"Authorization"
 				] = `Bearer ${response.data.token}`;
-				toast.success("Login efetuado com sucesso!");
 			} else {
 				throw new Error(
 					response.data.error ||
@@ -68,10 +66,7 @@ export const AuthProvider = ({ children }) => {
 			}
 		} catch (error) {
 			console.error("Erro ao fazer login:", error);
-			toast.error(
-				error.response?.data?.message ||
-					"Erro ao fazer login. Por favor, tente novamente."
-			);
+		
 		} finally {
 			setLoading(false);
 		}
@@ -84,14 +79,13 @@ export const AuthProvider = ({ children }) => {
 		sessionStorage.clear();
 		delete api.defaults.headers.common["Authorization"];
 		window.location.href = "/login";
-		toast.success("Logout efetuado com sucesso!");
 	};
 
 	return (
 		<AuthContext.Provider
 			value={{ user, signed: !!user, SignIn, signout, loading }}
 		>
-			{authChecked ? children : <LoadingComponent />}
+		 {children}
 		</AuthContext.Provider>
 	);
 };
