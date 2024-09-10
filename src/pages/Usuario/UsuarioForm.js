@@ -84,7 +84,7 @@ const UsuarioForm = () => {
         <button type="submit">Salvar</button>
       </form>
 
-      <button onClick={() => navigate('/lista-usuarios')}>Voltar para a Lista</button>
+      <button onClick={() => navigate('/lista-usuario')}>Voltar para a Lista</button>
       <button onClick={() => navigate('/home')}>Home</button>
     </div>
   );
