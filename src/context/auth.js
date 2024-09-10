@@ -46,7 +46,8 @@ export const AuthProvider = ({ children }) => {
 		const Senha = senha;
 		try {
 			setLoading(true);
-			const response = await api.post("/usuarios/login", { NomeUsuario, Senha });
+			const response = await api.post("/usuarios/login/", { NomeUsuario, Senha });
+			console.log(response.data)
 			if (response.status === 200 && response.data.token) {
 				const tokenData = jwtDecode(response.data.token);
 				setUser({ id: tokenData.id, nomeUsuario: tokenData.nomeUsuario });
@@ -78,7 +79,7 @@ export const AuthProvider = ({ children }) => {
 		localStorage.clear();
 		sessionStorage.clear();
 		delete api.defaults.headers.common["Authorization"];
-		window.location.href = "/login";
+		window.location.href = "/";
 	};
 
 	return (

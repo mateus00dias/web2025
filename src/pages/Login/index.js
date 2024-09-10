@@ -14,7 +14,7 @@ const Login = () => {
 
   useEffect(() => {
 		if (signed) {
-			navigate("/financeiro");
+			navigate("/home");
 		}
 	}, [signed, navigate]);
 
@@ -22,6 +22,7 @@ const Login = () => {
 		e.preventDefault();
 	
 		try {
+      console.log(nomeUsuario, senha)
 			await SignIn(nomeUsuario, senha);
 		} catch (error) {
 			console.error("Login failed:", error);

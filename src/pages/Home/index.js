@@ -1,9 +1,12 @@
-import React from 'react';
+import { useContext } from "react";
 import { Link } from 'react-router-dom';
 import '../../css/home.css';
 import logoImg from '../../img/logo.png';
+import { AuthContext } from "../../context/auth";
 
 const Home = () => {
+  const { signout } = useContext(AuthContext);
+
   return (
     <div className="home-container">
       <header className="header">
@@ -18,6 +21,7 @@ const Home = () => {
             <li><Link to="/cadastro-carro">Cadastrar Veículo</Link></li>
             <li><Link to="/cadastro-venda">Fazer Venda</Link></li>
             <li><Link to="/cadastro-usuario">Cadastrar Usuário</Link></li>
+            <li><button onClick={signout}>Logout</button></li>
           </ul>
         </nav>
       </header>
